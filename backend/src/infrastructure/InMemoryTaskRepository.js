@@ -1,6 +1,6 @@
-const { Task } = require("./domain");
+const { Task } = require("../domain/Task");
 
-class TaskRepository {
+class InMemoryTaskRepository {
   constructor() {
     this.tasks = [
       new Task({ id: 1, title: "Analizar el proyecto base", description: "Identificar responsabilidades", status: "en progreso" }),
@@ -31,4 +31,4 @@ class TaskRepository {
   }
 }
 
-module.exports = { TaskRepository };
+module.exports = { InMemoryTaskRepository };

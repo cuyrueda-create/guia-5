@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const { TaskRepository } = require("./taskRepository");
-const { TaskService } = require("./taskService");
-const { createTaskController } = require("./taskController");
-const { createTaskRoutes } = require("./taskRoutes");
+const { InMemoryTaskRepository } = require("./infrastructure/InMemoryTaskRepository");
+const { TaskService } = require("./application/TaskService");
+const { createTaskController } = require("./interfaces/http/TaskController");
+const { createTaskRoutes } = require("./interfaces/http/TaskRoutes");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-const repository = new TaskRepository();
+const repository = new InMemoryTaskRepository();
 const service = new TaskService(repository);
 const controller = createTaskController(service);
 
